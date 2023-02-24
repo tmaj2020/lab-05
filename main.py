@@ -54,14 +54,19 @@ def main():
         print(f"Go to the {location} and press enter to start sampling")
         input() # wait for the user to press enter
         signal_strengths = [] # list of signal strengths at this location
+        signal_strengths.clear()
 
         # TODO: collect 10 samples of the signal strength at this location, waiting 1 second between each sample
         # HINT: use the get_wifi_signal_strength function
+        for i in range(samples_per_location):
+            dBm = get_wifi_signal_strength()
+            signal_strengths.append(dBm)
+            time.sleep(time_between_samples)
         
         
         # TODO: calculate the mean and standard deviation of the signal strengths you collected at this location
-        signal_strength_mean = None
-        signal_strength_std = None
+        signal_strength_mean = np.mean(signal_strengths)
+        signal_strength_std = np.std(signal_strengths)
 
         # Question 6: What is the standard deviation? Why is it useful to calculate it?
         data.append((location, signal_strength_mean, signal_strength_std))
@@ -72,13 +77,25 @@ def main():
     # Question 7: What is a dataframe? Why is it useful to use a dataframe to store the data?
     # HINT: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html
     # HINT: print the dataframe to see what it looks like
-    # print(df)
+    print(df)
 
     # TODO: plot the data as a bar chart using plotly
     # HINT: https://plotly.com/python/bar-charts/
     # NOTE: use the error_y parameter of px.bar to plot the error bars (1 standard deviation)
     #   documentation: https://plotly.com/python-api-reference/generated/plotly.express.bar.html
     fig = px.bar(
+        df, 
+        x='location', 
+        y='signal_strength_mean', 
+        error_y ='signal_strength_std',
+        title='Signal Strengths Per Location',
+        labels={
+            'location': 'Location',
+            'signal_strength_mean': 'Average Signal Strength (dBm)',
+        },
+
+
+        template='plotly_white'
         
     )
     # Question 8: Why is it important to plot the error bars? What do they tell us?

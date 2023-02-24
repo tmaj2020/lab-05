@@ -46,7 +46,7 @@ def main():
         
     # TODO: create a dataframe from the data
     #       Make sure to name the columns appropriately (see the plot below)
-    df = None
+    df = pd.DataFrame(data, columns =['size', 'location', 'delay_mean', 'delay_std'])
     
     fig = px.line(
         df,

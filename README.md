@@ -2,8 +2,7 @@
 Clone this repo to your machine to get started!
 
 ## Team Members
-- team member 1
-- team member 2
+- Ty Benjamin Majam
 
 ## Lab Question Answers
 
