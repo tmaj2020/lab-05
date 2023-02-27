@@ -36,7 +36,7 @@ def main():
             delays = []
             for i in range(samples):
                 print(f"[{location}] Sending {size} bytes ({i+1}/{samples})")
-                delay = get_delay('localhost', size)
+                delay = get_delay('127.0.0.1', size)
                 delays.append(delay)
 
             delay_mean = np.mean(delays)
@@ -69,6 +69,11 @@ def main():
     # Question 10: Do you notice any trends in the data?
     #              How does it differ from Part 1?
     #              What do you think is causing the differences?
+    # For the resulting data it seems clear that the signals are very similar to each other since the
+    # signals given experience a delay that's usually around 3 ms. I do find it interesting that the
+    # delay decreases as the message size increases to 1000 bytes, but I know if I can perfectly explain
+    # why this is the case. It might have to do with the bandwidth of the signal between server and client
+    # being around 1000 bytes.
 
 
 if __name__ == "__main__":
